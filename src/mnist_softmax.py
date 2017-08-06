@@ -46,7 +46,7 @@ def main(_):
   W = tf.Variable(tf.zeros([784, 10]))
   b = tf.Variable(tf.zeros([10]))
   y = tf.matmul(x, W) + b
-  prediction = tf.softmax(y)
+  prediction = tf.nn.softmax(y)
 
   # Ground truth labels
   y_ = tf.placeholder(tf.float32, [None, 10])
