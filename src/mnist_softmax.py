@@ -42,11 +42,11 @@ def main(_):
     mnist = input_data.read_data_sets(FLAGS.data_dir, one_hot=True)
 
     # Create the model
-    x = tf.placeholder(tf.float32, [None, 784])
+    x = tf.placeholder(tf.float32, [None, 784], name='x')
     W = tf.Variable(tf.zeros([784, 10]))
     b = tf.Variable(tf.zeros([10]))
     y = tf.matmul(x, W) + b
-    prediction = tf.nn.softmax(y)
+    prediction = tf.nn.softmax(y, name='prediction')
 
     # Ground truth labels
     y_ = tf.placeholder(tf.float32, [None, 10])
@@ -68,7 +68,7 @@ def main(_):
 
     sess = tf.InteractiveSession()
 
-    builder = SavedModelBuilder('saved_model')
+    # builder = SavedModelBuilder('saved_model')
 
     tf.global_variables_initializer().run()
     # Train
@@ -87,7 +87,7 @@ def main(_):
       "y": build_tensor_info(y_)
     }
     signature_outputs = {
-      "out": build_tensor_info(prediction)
+      "prediction": build_tensor_info(prediction)
     }
     signature_def = build_signature_def(
       signature_inputs, signature_outputs,
