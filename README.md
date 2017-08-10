@@ -33,3 +33,7 @@ Straightforward:
 Harder:
 - Load digits from images on disk, rescale and feed into the classifier.
 - Train the model with rust instead of python.
+
+## Tip:
+
+Checkout the `working` branch for the solution to the first challenge.
