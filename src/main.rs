@@ -21,7 +21,7 @@ use tensorflow::Status;
 use tensorflow::StepWithGraph;
 use tensorflow::Tensor;
 use mnist::{Mnist, MnistBuilder};
-use rulinalg::matrix::{BaseMatrix, BaseMatrixMut, Matrix};
+use rulinalg::matrix::{BaseMatrix, Matrix};
 
 fn main() {
     if !Path::new("data").exists() {
@@ -61,7 +61,7 @@ fn main() {
 
     match run() {
         Err(e) => println!("Error: {}", e.to_string()),
-        Ok(s) => println!("")
+        Ok(_) => ()
     }
 }
 
@@ -136,7 +136,6 @@ fn run() -> Result<(), Box<Error>> {
     // Make a single prediction
     let mut prediction_step = StepWithGraph::new();
     prediction_step.add_input(&op_x, 0, &x);
-    prediction_step.add_target(&op_prediction);
     let y_ix = prediction_step.request_output(&op_prediction, 0);
     session.run(&mut prediction_step)?;
     println!("y_ix: {:?} output_type: {:?}", y_ix, prediction_step.output_data_type(0));
