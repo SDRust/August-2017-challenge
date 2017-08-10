@@ -106,12 +106,9 @@ fn run() -> Result<(), Box<Error>> {
     }
 
     // Generate an input test image.
-    let mut x = Tensor::new(&[1, (rows*cols) as u64]);
-    let mut y = Tensor::new(&[10 as u64]);
-    y[trn_lbl[0] as usize] = 1.0;
-    for i in 0..28*28 {
-        x[i] = trn_img[i] as f32 / 255.0;
-    }
+
+    // TODO: Allocate TensorFlow `Tensor`s for input and output and fill them with data for a
+    // single image
 
     // Load the saved model exported by regression_savedmodel.py.
     let mut graph = Graph::new();
@@ -119,29 +116,17 @@ fn run() -> Result<(), Box<Error>> {
                                                 &["train", "serve"],
                                                 &mut graph,
                                                 export_dir)?;
-    let op_x = graph.operation_by_name_required("x")?;
-    // let op_y = graph.operation_by_name_required("y")?;
-    let op_prediction = graph.operation_by_name_required("prediction")?;
-    // let op_train = graph.operation_by_name_required("train")?;
+    // TODO: Pull out the input (`x`) and output (`prediction`) ops by name from the graph
 
-    // Train the model (e.g. for fine tuning).
-    // let mut train_step = StepWithGraph::new();
-    // train_step.add_input(&op_x, 0, &x);
-    // train_step.add_input(&op_y, 0, &y);
-    // train_step.add_target(&op_train);
-    // for _ in 0..steps {
-    //     session.run(&mut train_step)?;
-    // }
 
     // Make a single prediction
     let mut prediction_step = StepWithGraph::new();
-    prediction_step.add_input(&op_x, 0, &x);
-    let y_ix = prediction_step.request_output(&op_prediction, 0);
-    session.run(&mut prediction_step)?;
-    println!("y_ix: {:?} output_type: {:?}", y_ix, prediction_step.output_data_type(0));
 
-    // Check our results.
-    let y_val: &[f32] = &prediction_step.take_output(y_ix)?;
-    println!("{:?}", y_val);
+    // TODO: 
+    // Add x as an input (binding it to data) 
+    // Request the prediction output) 
+    // then run the session.
+    // Then extract the results and print
+
     Ok(())
 }
