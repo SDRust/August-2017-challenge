@@ -1,9 +1,8 @@
 # August-2017-challenge
 
 From the TensorFlow web page:
-```
-TensorFlow™ is an open source software library for numerical computation using data flow graphs. Nodes in the graph represent mathematical operations, while the graph edges represent the multidimensional data arrays (tensors) communicated between them. The flexible architecture allows you to deploy computation to one or more CPUs or GPUs in a desktop, server, or mobile device with a single API.
-```
+
+    TensorFlow™ is an open source software library for numerical computation using data flow graphs. Nodes in the graph represent mathematical operations, while the graph edges represent the multidimensional data arrays (tensors) communicated between them. The flexible architecture allows you to deploy computation to one or more CPUs or GPUs in a desktop, server, or mobile device with a single API.
 
 Recently, TensorFlow started exposing a C API which was quickly used to implement Rust bindings.
 One shortcoming of the current C API is it does not expose an easy way to construct graphs (only to
@@ -14,10 +13,9 @@ The network used here is the "hello world" of deep learning, MNIST MLP described
 documentation](https://www.tensorflow.org/get_started/mnist/beginners).
 
 ## How to use this example
-(Optional: since I committed the serialized model, you don't need to do this yourself now)
+(First two steps are optional since I committed the serialized model)
 - Install TensorFlow for running the python script.
 - Run `./run.sh`
-
 - `cargo run`
 
 ## Task ideas
